@@ -16,31 +16,24 @@ WARNING:
   database with another name as DataWarehouseDB and you can skip the code - IF EXISTS ......
 */
 
--- Create Databse 'DataWarehouse'
+-- Create Databse 'DataWarehouseDB'
 USE MASTER;
 GO
-
---Drop and recreate the 'DataWarehouse' database
-IF EXISTS (SELECT 1 FROM sys.databases WHERE name = 'DataWarehouse')
+--Drop and recreate the 'DataWarehouseDB' database
+IF EXISTS (SELECT 1 FROM sys.databases WHERE name = 'DataWarehouseDB')
 BEGIN
-	ALTER DATABASE DataWarehouse SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-	DROP DATABASE DataWarehouse;
+	ALTER DATABASE DataWarehouseDB SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+	DROP DATABASE DataWarehouseDB;
 END;
 GO
-
 -- Create the 'DataWarehouse' database
-
-CREATE DATABASE DataWarehouse;
+CREATE DATABASE DataWarehouseDB;
 GO
-
-USE DataWarehouse;
+USE DataWarehouseDB;
 GO
-
 CREATE SCHEMA bronze;
 GO
-
 CREATE SCHEMA silver;
 GO
-
 CREATE SCHEMA gold;
 GO
