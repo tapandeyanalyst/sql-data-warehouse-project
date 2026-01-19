@@ -12,7 +12,6 @@ Each view has been created fromt the silver layer with clean and transformed dat
 =========================================================
 -- CREATE Dimensions : gold.dim_customers
 =========================================================
-
 USE DataWarehouseDB;
 GO
 IF OBJECT_ID('gold.dim_customers', 'V' ) IS NOT NULL 
@@ -50,15 +49,13 @@ SELECT
 	CASE WHEN ci.cst_gndr != 'n/a' THEN ci.cst_gndr --CRM is the Master for Gender Info
 	ELSE COALESCE(ca.gen, 'n/a')
 	END AS new_gen
-	
 FROM Silver.crm_cust_info AS ci
-
 LEFT JOIN silver.erp_cust_az12	AS ca ON ci.cst_key = ca.cid
 LEFT JOIN silver.erp_loc_a101	AS la ON ci.cst_key = la.cid
 ORDER BY 1,2
 
 ---- duplicate check
-select customer_id, count(*) from 
+SELECT customer_id, count(*) from 
 (
 SELECT
 	ci.cst_id				AS customer_id,
